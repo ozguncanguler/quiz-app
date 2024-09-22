@@ -62,11 +62,11 @@ const QuizPage: React.FC<QuizPageComponentProps> = ({ questions }) => {
   };
 
   return (
-    <div className="p-4">
-      <h1 className="text-2xl font-bold">Test {testId}</h1>
+    <div className="p-4 flex flex-col items-center justify-around w-full h-full">
+      <h1 className="h-1/5 content-center text-2xl font-bold">Test {testId}</h1>
       {currentQuestions.length > 0 &&
         currentQuestionIndex < currentQuestions.length && (
-          <div>
+          <div className="h-4/5 flex flex-col justify-between w-full md:w-2/3">
             <h2 className="text-xl mb-4">
               {currentQuestionIndex + 1} -{" "}
               {currentQuestions[currentQuestionIndex].title}
@@ -84,6 +84,19 @@ const QuizPage: React.FC<QuizPageComponentProps> = ({ questions }) => {
                   </button>
                 )
               )}
+              <button
+                disabled={!isClickable}
+                className="block w-full py-2 px-4 mb-2 bg-red-700 rounded text-left disabled:bg-neutral-500 disabled:text-neutral-400"
+                onClick={() => {
+                  answersArray.current.push({
+                    option: "X",
+                    answer: "No answer",
+                  });
+                  nextQuestion(answersArray.current);
+                }}
+              >
+                Skip question
+              </button>
             </div>
             <div className="text-right mt-4">Time left: {timeLeft}s</div>
           </div>
